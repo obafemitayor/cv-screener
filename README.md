@@ -102,7 +102,7 @@ Users are provided with an interactive conversational interface for exploring an
 
 These are the core components of the backend:
 
-- `cv_ingestion/` folder: contains a script used to seed the application with the fake CV PDFs. It extracts text from each PDF, chunks the content, generates embeddings, and stores the chunks in ChromaDB with useful metadata.
+- `cv_ingestion` folder: contains a script used to seed the application with the fake CV PDFs. It extracts text from each PDF, chunks the content, generates embeddings, and stores the chunks in ChromaDB with useful metadata.
 - `ChromaDB` is a vector database used to store and search embeddings. The system uses it to store generated embeddings alongside metadata that identifies a text chunk of a particular CV.
 - API Endpoints
   - `POST /search` accepts a request body containing a query property and an optional chat_history property. It searches the CV collection for information that best answers the query and returns the most relevant answer.
