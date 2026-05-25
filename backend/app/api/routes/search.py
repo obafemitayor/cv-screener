@@ -3,7 +3,7 @@ import logging
 from fastapi import APIRouter, HTTPException, Request
 
 from app.schemas.search import SearchRequest, SearchResponse
-from app.services.cv_service import (
+from app.services.search_service import (
     get_question,
     get_relevant_cvs_for_question,
     generate_response_from_cvs,

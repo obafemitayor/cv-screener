@@ -8,6 +8,7 @@ from app.storage.vector_store import get_cvs_similar_to_embedding
 
 CV_SEARCH_LIMIT = 10
 
+
 async def _rewrite_question(
     question: str,
     history: list[dict[str, str]],
@@ -21,6 +22,7 @@ async def _rewrite_question(
 
     return rewritten_query
 
+
 async def get_question(payload: SearchRequest) -> str:
     if not payload.chat_history:
         return payload.query
@@ -33,6 +35,7 @@ async def get_question(payload: SearchRequest) -> str:
         ],
     )
 
+
 async def get_relevant_cvs_for_question(question: str) -> list[dict[str, Any]]:
     embedding = await generate_embedding_from_text(question)
     if not embedding:
@@ -43,6 +46,7 @@ async def get_relevant_cvs_for_question(question: str) -> list[dict[str, Any]]:
         top_k=CV_SEARCH_LIMIT,
     )
     return cvs
+
 
 async def generate_response_from_cvs(
     question: str,

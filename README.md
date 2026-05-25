@@ -5,16 +5,19 @@
    - [Backend](#backend)
    - [Frontend](#frontend)
 3. [Repository Structure](#repository-structure)
-4. [Running The App](#running-the-app)
+4. [Code Structure](#code-structure)
+   - [Backend](#backend-1)
+   - [Frontend](#frontend-1)
+5. [Running The App](#running-the-app)
    - [Prerequisite](#prerequisite)
    - [Seeding The Application With CVs](#seeding-the-application-with-cvs)
    - [Running the Backend](#running-the-backend)
    - [Run Frontend](#run-frontend)
-5. [Running The Tests](#running-the-tests)
-   - [Backend](#backend-1)
-   - [Frontend](#frontend-1)
-6. [CV Screening Algorithm](#cv-screening-algorithm)
-7. [Improvements To Be Done If I Had More Time](#improvements-to-be-done-if-i-had-more-time)
+6. [Running The Tests](#running-the-tests)
+   - [Backend](#backend-2)
+   - [Frontend](#frontend-2)
+7. [CV Screening Algorithm](#cv-screening-algorithm)
+8. [Improvements To Be Done If I Had More Time](#improvements-to-be-done-if-i-had-more-time)
 
 ## Overview
 
@@ -60,7 +63,7 @@ Users are provided with an interactive conversational interface for exploring an
 │   │   ├── schemas/
 │   │   │   └── search.py
 │   │   ├── services/
-│   │   │   └── cv_service.py
+│   │   │   └── search_service.py
 │   │   ├── storage/
 │   │   │   └── vector_store.py
 │   │   └── utils/
@@ -92,6 +95,44 @@ Users are provided with an interactive conversational interface for exploring an
     │   └── main.tsx
     └── vite.config.ts
 ```
+
+## Code Structure
+
+### Backend
+
+The backend is organized around a small set of focused modules:
+
+- `cv_ingestion/` contains the script used to seed the application with CV PDFs. It extracts text from each PDF, chunks the content, generates embeddings, and stores the chunks in ChromaDB with useful metadata.
+- `ChromaDB` is a vector database used to store and search embeddings. The system uses it to store generated embeddings alongside metadata that identifies a text chunk of a particular CV.
+
+#### API Endpoints
+
+`POST /search`: Accepts a request body containing a query property and an optional conversationHistory property. It searches the CV collection for information that best answers the query and returns the most relevant results.
+
+Example request:
+
+```json
+{
+  "query": "Who has Python experience?",
+  "chat_history": []
+}
+```
+
+Example response:
+
+```json
+{
+  "response": "The following candidates have Python experience: ..."
+}
+```
+
+### Frontend
+
+The frontend is a single-page React application built with Chakra UI. It uses a small Context API state container for conversation state, and the Home page is the only page in the app.
+
+- `Home` renders the full chat experience.
+- The page shows the title, description, conversation history, loading state, error state, and the question input area.
+- The UI supports follow-up questions by keeping prior messages in frontend state and sending them with each request.
 
 ## Running The App
 
