@@ -5,7 +5,7 @@
    - [Backend](#backend)
    - [Frontend](#frontend)
 3. [Repository Structure](#repository-structure)
-4. [Code Structure](#code-structure)
+4. [Code Structure (Core Components)](#code-structure-core-components)
    - [Backend](#backend-1)
    - [Frontend](#frontend-1)
 5. [Running The App](#running-the-app)
@@ -96,7 +96,7 @@ Users are provided with an interactive conversational interface for exploring an
     └── vite.config.ts
 ```
 
-## Code Structure
+## Code Structure (Core Components)
 
 ### Backend
 
